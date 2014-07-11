@@ -22,7 +22,7 @@ workflow Stop-ShamirLab
     Select-AzureSubscription -SubscriptionName $subscriptionName
  
 
-    $vmlist = (get-azurevm -ServiceName $serviceName | ? {$_.PowerState -ne "Stopped"})
+    $vmlist = (get-azurevm -ServiceName $serviceName | ? {$_.InstanceStatus -ne "StoppedDeallocated"})
 
     foreach($vm in $vmList){
         Write-Output "Stopping '$vm.Name'"

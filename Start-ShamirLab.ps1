@@ -52,5 +52,6 @@ workflow Start-ShamirLab
         }
 
     }
+
     Write-Output "Successfully started lab"
 }
