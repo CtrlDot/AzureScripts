@@ -5,7 +5,7 @@
     $NumberOfVMs
 )
     
-$serviceName = 'ShamirAXTraining'
+$serviceName = '-------'
 $vmNamePrefix = 'AX2012R3-Demo-'
 $imageName = "AX2013R3-Demo"
 $storageLocation = '-----'
@@ -42,9 +42,10 @@ if ($vmlist.count -gt $NumberOfVMs){
     
 if ($vmlist.count -lt $NumberOfVMs) {
     $dnsServer = New-AzureDns -Name "Localhost" -IPAddress "127.0.0.1"
-    $dnsServer1 = Get-AzureDns
+    
     $numberToAdd = $NumberOfVMs - $vmlist.count
     "Adding '$numberToAdd' vms"
+    
     while($numberToAdd -gt 0){
         $numberToAdd = $numberToAdd - 1
         $newName = $vmNamePrefix + [guid]::NewGuid()
@@ -56,5 +57,5 @@ if ($vmlist.count -lt $NumberOfVMs) {
     }
 
     $vmlist = @(Get-AzureVm -ServiceName $serviceName | ? {$_.Name.StartsWith($vmNamePrefix)} )
-    Write-Output "Number of VMs remaining in $serviceName are '$vmlist.count'"
+    "Number of VMs remaining in $serviceName are '$vmlist.count'"
 }
